@@ -2,7 +2,7 @@
 
 ## Overview
 
-Die API ermöglicht das Abrufen von diversen Informationen für einen Studenten an (unter anderem?) der Dualen Hochschule Sachsen
+The API allows students of (among others?) the Duale Hochschule Sachsen to access different pieces of information concerning their studying.
 
 **Base URL**: `https://selfservice.campus-dual.de`  
 **Format**: JSON  
