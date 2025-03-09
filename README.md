@@ -144,8 +144,7 @@ https://selfservice.campus-dual.de/dash/getexamstats?user=<ID>&hash=<HASH>
 
 **Fun fact**: The other last 3 parameters are broken and will have no influence on the response. They were likely meant to limit the size of the returned timetable to the appropriate scope, however the API always returns the entire student timetable available (which is likely part of why the response takes between 2 and 6 seconds).
 
-**Another fun fact**: Notice how this and only this endpoint uses `userid` rather than `user`?
-I love legacy code, I love SAP NetWeaver!
+**Another fun fact**: Notice how this and only this endpoint uses `userid` rather than `user`
 
 **Hint**: Adding a parameter with the current unix-timestamp may still be advantageous to prevent caching, resulting in an outdated result if the timetable changed recently
 
