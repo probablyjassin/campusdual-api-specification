@@ -45,7 +45,7 @@ I have not encountered any rate limits while using this API. The website itself 
 
 **Request**:
 
-```http
+```text
 https://selfservice.campus-dual.de/dash/getfs?user=<ID>&hash=<HASH>
 ```
 
@@ -63,7 +63,7 @@ https://selfservice.campus-dual.de/dash/getfs?user=<ID>&hash=<HASH>
 
 **Request**:
 
-```http
+```text
 https://selfservice.campus-dual.de/dash/getcp?user=<ID>&hash=<HASH>
 ```
 
@@ -81,7 +81,7 @@ https://selfservice.campus-dual.de/dash/getcp?user=<ID>&hash=<HASH>
 
 **Request**:
 
-```http
+```text
 https://selfservice.campus-dual.de/dash/gettimeline?user=<ID>&hash=<HASH>
 ```
 
@@ -125,7 +125,7 @@ https://selfservice.campus-dual.de/dash/gettimeline?user=<ID>&hash=<HASH>
 
 \*\*Request:
 
-```http
+```text
 https://selfservice.campus-dual.de/dash/getexamstats?user=<ID>&hash=<HASH>
 ```
 
