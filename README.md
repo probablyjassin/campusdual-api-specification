@@ -119,6 +119,24 @@ https://selfservice.campus-dual.de/dash/gettimeline?user=<ID>&hash=<HASH>
 }
 ```
 
+#### Student Exam Stats
+
+- **URL**: `/dash/getexamstats`
+- **Method**: `GET`
+- **Query Parameters for Auth**: `user`, `hash`
+
+\*\*Request:
+
+```http
+https://selfservice.campus-dual.de/dash/getexamstats?user=<ID>&hash=<HASH>
+```
+
+**Response** (example):
+
+```json
+{ "EXAMS": 4, "SUCCESS": 3, "FAILURE": 1, "WPCOUNT": 5, "MODULES": 3, "BOOKED": 0, "MBOOKED": 4 }
+```
+
 #### Student Timetable
 
 - **URL**: `/room/json`
