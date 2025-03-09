@@ -192,3 +192,17 @@ https://selfservice.campus-dual.de/room/json?userid=<ID>&hash=<HASH>
   ...
 ]
 ```
+
+# Q&A
+
+**Q**: Why does the API always return `200 OK` even if the authentication went wrong? Isn't this wrong?
+**A**: yes.
+
+**Q**: Why does authentication happen over query-parameters instead of headers? Isn't this bad practice?
+**A**: yes.
+
+**Q**: Why is `room/json` so broken, resulting in it always sending the entire timetable and taking multiple seconds to load? Doesn't this suck?
+**A**: yes.
+
+**Q**: Why is `/room/json` the only endpoint that uses `userid` instead of `user` for auth like every other endpoint? Isn't this inconsistent?
+**A**: yes
