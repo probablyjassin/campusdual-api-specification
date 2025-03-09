@@ -89,33 +89,31 @@ https://selfservice.campus-dual.de/dash/gettimeline?user=<ID>&hash=<HASH>
 
 ```json
 {
-  "wiki-url": "https:\/\/selfservice.campus-dual.de\/dash\/timeline",
-  "wiki-section": "Campus-Dual Blockplan",
-  "dateTimeFormat": "Gregorian",
-  "events": [
-    {
-      "start": "Tue, 01 Oct 2024 00:00:00 +0200",
-      "end": "Sun, 22 Dec 2024 00:00:00 +0100",
-      "durationEvent": true,
-      "color": "#0070a3",
-      "title": "Theorie",
-      "caption": "01.10.2024 bis 22.12.2024",
-      "description": "<strong>Theoriephase<\/strong> 1. Fachsemester<br>vom 01.10.2024 bis 22.12.2024",
-      "trackNum": 2
-    },
-    {
-      "start": "Mon, 23 Dec 2024 00:00:00 +0100",
-      "end": "Sun, 30 Mar 2025 00:00:00 +0100",
-      "durationEvent": true,
-      "color": "#119911",
-      "title": "Praxis",
-      "caption": "23.12.2024 bis 30.03.2025",
-      "description": "<strong>Praxisphase<\/strong> 1. Fachsemester<br>vom 23.12.2024 bis 30.03.2025",
-      "trackNum": 3
-    },
-    ...
-  ]
-
+	"wiki-url": "https://selfservice.campus-dual.de/dash/timeline",
+	"wiki-section": "Campus-Dual Blockplan",
+	"dateTimeFormat": "Gregorian",
+	"events": [
+		{
+			"start": "Tue, 01 Oct 2024 00:00:00 +0200",
+			"end": "Sun, 22 Dec 2024 00:00:00 +0100",
+			"durationEvent": true,
+			"color": "#0070a3",
+			"title": "Theorie",
+			"caption": "01.10.2024 bis 22.12.2024",
+			"description": "<strong>Theoriephase</strong> 1. Fachsemester<br>vom 01.10.2024 bis 22.12.2024",
+			"trackNum": 2
+		},
+		{
+			"start": "Mon, 23 Dec 2024 00:00:00 +0100",
+			"end": "Sun, 30 Mar 2025 00:00:00 +0100",
+			"durationEvent": true,
+			"color": "#119911",
+			"title": "Praxis",
+			"caption": "23.12.2024 bis 30.03.2025",
+			"description": "<strong>Praxisphase</strong> 1. Fachsemester<br>vom 23.12.2024 bis 30.03.2025",
+			"trackNum": 3
+		}
+	]
 }
 ```
 
@@ -153,7 +151,7 @@ I love legacy code, I love SAP NetWeaver!
 
 \*\*Request:
 
-```http
+```text
 https://selfservice.campus-dual.de/room/json?userid=<ID>&hash=<HASH>
 ```
 
@@ -161,35 +159,34 @@ https://selfservice.campus-dual.de/room/json?userid=<ID>&hash=<HASH>
 
 ```json
 [
-  {
-    "title": "5CS-ZSPLM-11",
-    "start": 1727762400,
-    "end": 1727767800,
-    "allDay": false,
-    "description": "Zentrales Stundenplanungsmodul",
-    "color": "orange",
-    "editable": false,
-    "room": "205 Seminarraum",
-    "sroom": "5SR 205",
-    "instructor": "Prof. REDACTED",
-    "sinstructor": "REDACTED",
-    "remarks": "Einf\u00fchrung in das Studium durch die Studiengangleitung"
-  },
-  {
-    "title": "5CS-ETHLE-10",
-    "start": 1727769600,
-    "end": 1727775000,
-    "allDay": false,
-    "description": "VS Grdl. d. Elektrot. u.Halbleiterel.",
-    "color": "orange",
-    "editable": false,
-    "room": "205 Seminarraum",
-    "sroom": "5SR 205",
-    "instructor": "Prof. REDACTED",
-    "sinstructor": "REDACTED",
-    "remarks": ""
-  },
-  ...
+	{
+		"title": "5CS-ZSPLM-11",
+		"start": 1727762400,
+		"end": 1727767800,
+		"allDay": false,
+		"description": "Zentrales Stundenplanungsmodul",
+		"color": "orange",
+		"editable": false,
+		"room": "205 Seminarraum",
+		"sroom": "5SR 205",
+		"instructor": "Prof. REDACTED",
+		"sinstructor": "REDACTED",
+		"remarks": "Einf\u00fchrung in das Studium durch die Studiengangleitung"
+	},
+	{
+		"title": "5CS-ETHLE-10",
+		"start": 1727769600,
+		"end": 1727775000,
+		"allDay": false,
+		"description": "VS Grdl. d. Elektrot. u.Halbleiterel.",
+		"color": "orange",
+		"editable": false,
+		"room": "205 Seminarraum",
+		"sroom": "5SR 205",
+		"instructor": "Prof. REDACTED",
+		"sinstructor": "REDACTED",
+		"remarks": ""
+	}
 ]
 ```
 
