@@ -55,6 +55,8 @@ https://selfservice.campus-dual.de/dash/getfs?user=<ID>&hash=<HASH>
 "02 "
 ```
 
+(yes that whitespace is not a typo by me I don't know why it's there)
+
 #### Student Credit Points
 
 - **URL**: `/dash/getcp`
