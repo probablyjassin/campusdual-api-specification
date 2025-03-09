@@ -149,7 +149,7 @@ I love legacy code, I love SAP NetWeaver!
 
 **Hint**: Adding a parameter with the current unix-timestamp may still be advantageous to prevent caching, resulting in an outdated result if the timetable changed recently
 
-\*\*Request:
+**Request**:
 
 ```text
 https://selfservice.campus-dual.de/room/json?userid=<ID>&hash=<HASH>
