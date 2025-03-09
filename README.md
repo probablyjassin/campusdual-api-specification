@@ -123,7 +123,7 @@ https://selfservice.campus-dual.de/dash/gettimeline?user=<ID>&hash=<HASH>
 - **Method**: `GET`
 - **Query Parameters for Auth**: `user`, `hash`
 
-\*\*Request:
+**Request**:
 
 ```text
 https://selfservice.campus-dual.de/dash/getexamstats?user=<ID>&hash=<HASH>
