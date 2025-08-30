@@ -1,0 +1,483 @@
+openapi: 3.0.3
+info:
+  title: CampusDual API Specification
+  version: "1.0"
+  description: collected for and by students :]
+servers:
+  - url: https://selfservice.campus-dual.de
+paths:
+  /dash/getfs:
+    summary: current semester
+    get:
+      parameters:
+        - $ref: "#/components/parameters/user"
+          name: user
+        - $ref: "#/components/parameters/hash"
+          name: hash
+      responses:
+        "200":
+          content:
+            application/json:
+              example: '"02 "'
+          description: yes, the trailing whitespace is real (but it can't hurt you)
+      description: ""
+  /dash/getcp:
+    summary: credit points
+    description: get the current amount of credit points of a student
+    get:
+      tags: []
+      parameters:
+        - $ref: "#/components/parameters/user"
+          name: user
+        - $ref: "#/components/parameters/hash"
+          name: hash
+      responses:
+        "200":
+          content:
+            application/json:
+              example: 14
+          description: "This time actually a number: the current balance of credit points"
+  /dash/gettimeline:
+    summary: timeline
+    description: Chapters of a student's studies
+    get:
+      parameters:
+        - $ref: "#/components/parameters/user"
+          name: user
+        - in: query
+          name: hash
+          required: false
+          description: Not required here lol
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Info and an array of chapters
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/timeline"
+              example:
+                wiki-url: "https://selfservice.campus-dual.de/dash/timeline"
+                wiki-section: "Campus-Dual Blockplan"
+                dateTimeFormat: "Gregorian"
+                events:
+                  - start: "Tue, 01 Oct 2024 00:00:00 +0200"
+                    end: "Sun, 22 Dec 2024 00:00:00 +0100"
+                    durationEvent: true
+                    color: "#0070a3"
+                    title: "Theorie"
+                    caption: "01.10.2024 bis 22.12.2024"
+                    description: "<strong>Theoriephase</strong> 1. Fachsemester<br>vom 01.10.2024 bis 22.12.2024"
+                    trackNum: 2
+                  - start: "Mon, 23 Dec 2024 00:00:00 +0100"
+                    end: "Sun, 30 Mar 2025 00:00:00 +0100"
+                    durationEvent: true
+                    color: "#119911"
+                    title: "Praxis"
+                    caption: "23.12.2024 bis 30.03.2025"
+                    description: "<strong>Praxisphase</strong> 1. Fachsemester<br>vom 23.12.2024 bis 30.03.2025"
+                    trackNum: 3
+  /dash/getexamstats:
+    summary: exam stats
+    description: Overview of exams (booked, passed, failed, ...)
+    get:
+      parameters:
+        - $ref: "#/components/parameters/user"
+          name: user
+        - $ref: "#/components/parameters/hash"
+          name: hash
+      responses:
+        "200":
+          description: Object containing exam statistics
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/exam-stats"
+              example:
+                EXAMS: 4
+                SUCCESS: 3
+                FAILURE: 1
+                WPCOUNT: 5
+                MODULES: 3
+                BOOKED: 0
+                MBOOKED: 4
+  /room/json:
+    summary: timetable
+    description: Student's timetable. Response times may be slow (2-6 seconds) because you always get the whole damn schedule.
+    get:
+      parameters:
+        - $ref: "#/components/parameters/userid"
+        - $ref: "#/components/parameters/hash"
+        - name: start
+          in: query
+          required: false
+          description: Start date (non-functional, has no effect on response)
+          schema:
+            type: string
+        - name: end
+          in: query
+          required: false
+          description: End date (non-functional, has no effect on response)
+          schema:
+            type: string
+        - name: _
+          in: query
+          required: false
+          description: Cache prevention parameter (typically a timestamp)
+          schema:
+            type: string
+      responses:
+        "200":
+          description: An array of timetable entries
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/timetable-entry"
+              example:
+                - title: "5CS-ZSPLM-11"
+                  start: 1727762400
+                  end: 1727767800
+                  allDay: false
+                  description: "Zentrales Stundenplanungsmodul"
+                  color: "orange"
+                  editable: false
+                  room: "205 Seminarraum"
+                  sroom: "5SR 205"
+                  instructor: "Prof. REDACTED"
+                  sinstructor: "REDACTED"
+                  remarks: "Einführung in das Studium durch die Studiengangleitung"
+                - title: "5CS-ETHLE-10"
+                  start: 1727769600
+                  end: 1727775000
+                  allDay: false
+                  description: "VS Grdl. d. Elektrot. u.Halbleiterel."
+                  color: "orange"
+                  editable: false
+                  room: "205 Seminarraum"
+                  sroom: "5SR 205"
+                  instructor: "Prof. REDACTED"
+                  sinstructor: "REDACTED"
+                  remarks: ""
+  /dash/getreminders:
+    summary: student reminders
+    description: Information on upcoming exams and previous exam results
+    get:
+      parameters:
+        - $ref: "#/components/parameters/user"
+          name: user
+        - $ref: "#/components/parameters/hash"
+          name: hash
+      responses:
+        "200":
+          description: Reminders including upcoming exams and latest results
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/reminders"
+              example:
+                SEMESTER: 4
+                EXAMS: 0
+                ELECTIVES: 1
+                UPCOMING:
+                  [
+                    {
+                      EVDAT: "20251010",
+                      BEGUZ: "000000",
+                      ENDUZ: "120000",
+                      SM_SHORT: "5CS-PT2-00",
+                      SM_STEXT: "P Betriebssysteme und Netzwerke (PR)",
+                      ROOM: "",
+                      INSTRUCTOR: "",
+                      SROOM: "",
+                      SINSTRUCTOR: "",
+                      COMMENT: "Prüfung (SEP)",
+                      OBJID: "00000000",
+                      LOCATION: "",
+                    },
+                  ]
+                LATEST:
+                  [
+                    {
+                      AWOTYPE: "Studienmodul",
+                      AWOBJECT_SHORT: "5CS-ENG1W-00",
+                      AWOBJECT: "P Wirtschaftsenglisch u. Kommunikat. (K)",
+                      AWSTATUS: "Erfolgreich abgeschlossen",
+                      AGRTYPE: "Teilleistungsbeurteilung",
+                      CPGRADED: "  0.00000",
+                      CPUNIT: "ECTS-Credits",
+                      ACAD_YEAR: "Akad. Jahr 2024/2025",
+                      ACAD_SESSION: "Sommerperiode",
+                      AGRDATE: "20250625",
+                      BOOKDATE: "20250827",
+                      GRADESYMBOL: "1,3",
+                      BOOKREASON: "",
+                    },
+                  ]
+components:
+  schemas:
+    timeline:
+      required:
+        - wiki-url
+        - wiki-section
+        - dateTimeFormat
+        - events
+      type: object
+      properties:
+        wiki-url:
+          description: /
+          type: string
+          example: https://selfservice.campus-dual.de/dash/timeline
+        wiki-section:
+          description: /
+          type: string
+          example: Campus-Dual Blockplan
+        dateTimeFormat:
+          description: /
+          type: string
+          example: Gregorian
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/timeline-event"
+    timeline-event:
+      description: An event on a timeline.
+      required:
+        - start
+        - end
+        - durationEvent
+        - color
+        - title
+        - caption
+        - description
+        - trackNum
+      type: object
+      properties:
+        start:
+          format: date-time
+          description: Event start (RFC3339).
+          type: string
+          example: "2024-12-23T00:00:00+01:00"
+        end:
+          format: date-time
+          description: Event end (RFC3339).
+          type: string
+          example: "2025-03-30T00:00:00+01:00"
+        durationEvent:
+          description: >-
+            Whether the event spans a duration (true) or is a point-in-time
+            (false).
+          type: boolean
+          example: true
+        color:
+          description: Hex color for the event (3- or 6-digit).
+          pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$
+          type: string
+          example: "#119911"
+        title:
+          type: string
+          example: Praxis
+        caption:
+          type: string
+          example: 23.12.2024 bis 30.03.2025
+        description:
+          description: HTML/markup allowed.
+          type: string
+          example: >-
+            <strong>Praxisphase</strong> 1. Fachsemester<br>vom 23.12.2024 bis
+            30.03.2025
+        trackNum:
+          format: int32
+          description: Zero-based or positive track index for rendering.
+          minimum: 0
+          type: integer
+          example: 3
+      additionalProperties: false
+      example:
+        start: "2024-12-23T00:00:00+01:00"
+        end: "2025-03-30T00:00:00+01:00"
+        durationEvent: true
+        color: "#119911"
+        title: Praxis
+        caption: 23.12.2024 bis 30.03.2025
+        description: >-
+          <strong>Praxisphase</strong> 1. Fachsemester<br>vom 23.12.2024 bis
+          30.03.2025
+        trackNum: 3
+    exam-stats:
+      type: object
+      properties:
+        EXAMS:
+          type: integer
+          example: 4
+        SUCCESS:
+          type: integer
+          example: 3
+        FAILURE:
+          type: integer
+          example: 1
+        WPCOUNT:
+          type: integer
+          example: 5
+        MODULES:
+          type: integer
+          example: 3
+        BOOKED:
+          type: integer
+          example: 0
+        MBOOKED:
+          type: integer
+          example: 4
+    timetable-entry:
+      type: object
+      description: A single entry in the student's timetable
+      required:
+        - title
+        - start
+        - end
+        - allDay
+        - description
+        - color
+        - editable
+        - room
+        - sroom
+        - instructor
+        - sinstructor
+        - remarks
+      properties:
+        title:
+          type: string
+          description: Course identifier
+          example: "5CS-ZSPLM-11"
+        start:
+          type: integer
+          format: int64
+          description: Start time as Unix timestamp
+          example: 1727762400
+        end:
+          type: integer
+          format: int64
+          description: End time as Unix timestamp
+          example: 1727767800
+        allDay:
+          type: boolean
+          description: Whether this is an all-day event
+          example: false
+        description:
+          type: string
+          description: Course name/description
+          example: "Zentrales Stundenplanungsmodul"
+        color:
+          type: string
+          description: Color code for the event
+          example: "orange"
+        editable:
+          type: boolean
+          description: Whether the event is editable
+          example: false
+        room:
+          type: string
+          description: Full room name
+          example: "205 Seminarraum"
+        sroom:
+          type: string
+          description: Short room identifier
+          example: "5SR 205"
+        instructor:
+          type: string
+          description: Full instructor name
+          example: "Prof. REDACTED"
+        sinstructor:
+          type: string
+          description: Short instructor name
+          example: "REDACTED"
+        remarks:
+          type: string
+          description: Additional notes about the event
+          example: "Einführung in das Studium durch die Studiengangleitung"
+    reminders:
+      type: object
+      properties:
+        SEMESTER:
+          type: integer
+          example: 4
+        EXAMS:
+          type: integer
+          example: 0
+        ELECTIVES:
+          type: integer
+          example: 1
+        UPCOMING:
+          type: array
+          items:
+            type: object
+            properties:
+              EVDAT:
+                type: string
+                example: "20251010"
+              BEGUZ:
+                type: string
+                example: "000000"
+              ENDUZ:
+                type: string
+                example: "120000"
+              SM_SHORT:
+                type: string
+                example: "5CS-PT2-00"
+              SM_STEXT:
+                type: string
+                example: "P Betriebssysteme und Netzwerke (PR)"
+              ROOM:
+                type: string
+                example: ""
+              INSTRUCTOR:
+                type: string
+                example: ""
+              SROOM:
+                type: string
+                example: ""
+              SINSTRUCTOR:
+                type: string
+                example: ""
+              COMMENT:
+                type: string
+                example: "Prüfung (SEP)"
+              OBJID:
+                type: string
+                example: "00000000"
+              LOCATION:
+                type: string
+                example: ""
+  parameters:
+    user:
+      deprecated: false
+      example: "1234567"
+      name: user
+      description: student id
+      in: query
+      required: true
+      allowEmptyValue: false
+      schema:
+        type: number
+    hash:
+      name: hash
+      description: Login hash. Can be obtained by inspecting requests to the original website.
+      in: query
+      required: true
+      schema:
+        type: string
+    userid:
+      name: userid
+      description: Student ID (note this parameter name differs from 'user' used in other endpoints)
+      in: query
+      required: true
+      schema:
+        type: string
+      example: "1234567"
+  securitySchemes: {}
+  headers: {}
+  responses: {}
+tags: []
+security: []
