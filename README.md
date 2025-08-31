@@ -91,31 +91,31 @@ https://selfservice.campus-dual.de/dash/gettimeline?user=<ID>&hash=<HASH>
 
 ```json
 {
-	"wiki-url": "https://selfservice.campus-dual.de/dash/timeline",
-	"wiki-section": "Campus-Dual Blockplan",
-	"dateTimeFormat": "Gregorian",
-	"events": [
-		{
-			"start": "Tue, 01 Oct 2024 00:00:00 +0200",
-			"end": "Sun, 22 Dec 2024 00:00:00 +0100",
-			"durationEvent": true,
-			"color": "#0070a3",
-			"title": "Theorie",
-			"caption": "01.10.2024 bis 22.12.2024",
-			"description": "<strong>Theoriephase</strong> 1. Fachsemester<br>vom 01.10.2024 bis 22.12.2024",
-			"trackNum": 2
-		},
-		{
-			"start": "Mon, 23 Dec 2024 00:00:00 +0100",
-			"end": "Sun, 30 Mar 2025 00:00:00 +0100",
-			"durationEvent": true,
-			"color": "#119911",
-			"title": "Praxis",
-			"caption": "23.12.2024 bis 30.03.2025",
-			"description": "<strong>Praxisphase</strong> 1. Fachsemester<br>vom 23.12.2024 bis 30.03.2025",
-			"trackNum": 3
-		}
-	]
+  "wiki-url": "https://selfservice.campus-dual.de/dash/timeline",
+  "wiki-section": "Campus-Dual Blockplan",
+  "dateTimeFormat": "Gregorian",
+  "events": [
+    {
+      "start": "Tue, 01 Oct 2024 00:00:00 +0200",
+      "end": "Sun, 22 Dec 2024 00:00:00 +0100",
+      "durationEvent": true,
+      "color": "#0070a3",
+      "title": "Theorie",
+      "caption": "01.10.2024 bis 22.12.2024",
+      "description": "<strong>Theoriephase</strong> 1. Fachsemester<br>vom 01.10.2024 bis 22.12.2024",
+      "trackNum": 2
+    },
+    {
+      "start": "Mon, 23 Dec 2024 00:00:00 +0100",
+      "end": "Sun, 30 Mar 2025 00:00:00 +0100",
+      "durationEvent": true,
+      "color": "#119911",
+      "title": "Praxis",
+      "caption": "23.12.2024 bis 30.03.2025",
+      "description": "<strong>Praxisphase</strong> 1. Fachsemester<br>vom 23.12.2024 bis 30.03.2025",
+      "trackNum": 3
+    }
+  ]
 }
 ```
 
@@ -134,7 +134,15 @@ https://selfservice.campus-dual.de/dash/getexamstats?user=<ID>&hash=<HASH>
 **Response** (example):
 
 ```json
-{ "EXAMS": 4, "SUCCESS": 3, "FAILURE": 1, "WPCOUNT": 5, "MODULES": 3, "BOOKED": 0, "MBOOKED": 4 }
+{
+  "EXAMS": 4,
+  "SUCCESS": 3,
+  "FAILURE": 1,
+  "WPCOUNT": 5,
+  "MODULES": 3,
+  "BOOKED": 0,
+  "MBOOKED": 4
+}
 ```
 
 #### Student Timetable
@@ -160,35 +168,105 @@ https://selfservice.campus-dual.de/room/json?userid=<ID>&hash=<HASH>
 
 ```json
 [
-	{
-		"title": "5CS-ZSPLM-11",
-		"start": 1727762400,
-		"end": 1727767800,
-		"allDay": false,
-		"description": "Zentrales Stundenplanungsmodul",
-		"color": "orange",
-		"editable": false,
-		"room": "205 Seminarraum",
-		"sroom": "5SR 205",
-		"instructor": "Prof. REDACTED",
-		"sinstructor": "REDACTED",
-		"remarks": "Einf\u00fchrung in das Studium durch die Studiengangleitung"
-	},
-	{
-		"title": "5CS-ETHLE-10",
-		"start": 1727769600,
-		"end": 1727775000,
-		"allDay": false,
-		"description": "VS Grdl. d. Elektrot. u.Halbleiterel.",
-		"color": "orange",
-		"editable": false,
-		"room": "205 Seminarraum",
-		"sroom": "5SR 205",
-		"instructor": "Prof. REDACTED",
-		"sinstructor": "REDACTED",
-		"remarks": ""
-	}
+  {
+    "title": "5CS-ZSPLM-11",
+    "start": 1727762400,
+    "end": 1727767800,
+    "allDay": false,
+    "description": "Zentrales Stundenplanungsmodul",
+    "color": "orange",
+    "editable": false,
+    "room": "205 Seminarraum",
+    "sroom": "5SR 205",
+    "instructor": "Prof. REDACTED",
+    "sinstructor": "REDACTED",
+    "remarks": "Einf\u00fchrung in das Studium durch die Studiengangleitung"
+  },
+  {
+    "title": "5CS-ETHLE-10",
+    "start": 1727769600,
+    "end": 1727775000,
+    "allDay": false,
+    "description": "VS Grdl. d. Elektrot. u.Halbleiterel.",
+    "color": "orange",
+    "editable": false,
+    "room": "205 Seminarraum",
+    "sroom": "5SR 205",
+    "instructor": "Prof. REDACTED",
+    "sinstructor": "REDACTED",
+    "remarks": ""
+  }
 ]
+```
+
+#### Student reminders (upcoming exams and latest results)
+
+- **URL**: `/dash/getreminders`
+- **Method**: `GET`
+- **Query Parameter for Auth**: `user`, `hash`
+
+**Request**:
+
+```text
+https://selfservice.campus-dual.de/dash/getreminders?user=<ID>&hash=<HASH>
+```
+
+**Response** (example):
+
+```json
+{
+  "SEMESTER": 4,
+  "EXAMS": 0,
+  "ELECTIVES": 1,
+  "UPCOMING": [
+    {
+      "EVDAT": "20251010",
+      "BEGUZ": "000000",
+      "ENDUZ": "120000",
+      "SM_SHORT": "5CS-PT2-00",
+      "SM_STEXT": "P Betriebssysteme und Netzwerke (PR)",
+      "ROOM": "",
+      "INSTRUCTOR": "",
+      "SROOM": "",
+      "SINSTRUCTOR": "",
+      "COMMENT": "Prüfung (SEP)",
+      "OBJID": "00000000",
+      "LOCATION": ""
+    }
+  ],
+  "LATEST": [
+    {
+      "AWOTYPE": "Studienmodul",
+      "AWOBJECT_SHORT": "5CS-ENG1W-00",
+      "AWOBJECT": "P Wirtschaftsenglisch u. Kommunikat. (K)",
+      "AWSTATUS": "Erfolgreich abgeschlossen",
+      "AGRTYPE": "Teilleistungsbeurteilung",
+      "CPGRADED": "  0.00000",
+      "CPUNIT": "ECTS-Credits",
+      "ACAD_YEAR": "Akad. Jahr 2024/2025",
+      "ACAD_SESSION": "Sommerperiode",
+      "AGRDATE": "20250625",
+      "BOOKDATE": "20250827",
+      "GRADESYMBOL": "1,3",
+      "BOOKREASON": ""
+    },
+    {
+      "AWOTYPE": "Studienmodul",
+      "AWOBJECT_SHORT": "5CS-PYTHN-00",
+      "AWOBJECT": "P Python (C)",
+      "AWSTATUS": "Erfolgreich abgeschlossen",
+      "AGRTYPE": "Teilleistungsbeurteilung",
+      "CPGRADED": "  0.00000",
+      "CPUNIT": "ECTS-Credits",
+      "ACAD_YEAR": "Akad. Jahr 2024/2025",
+      "ACAD_SESSION": "Sommerperiode",
+      "AGRDATE": "20250620",
+      "BOOKDATE": "20250801",
+      "GRADESYMBOL": "1,0",
+      "BOOKREASON": ""
+    }
+  ]
+}
 ```
 
 # Q&A
