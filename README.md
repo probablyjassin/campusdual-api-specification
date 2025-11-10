@@ -32,8 +32,8 @@ The hash is obtainable by emulating a login to the site, but this cannot be done
 Check [here](https://github.com/Schrankian/campus-dual-app/issues/12#issuecomment-2399062382) and [here](https://github.com/probablyjassin/campusdual-api-specification/blob/main/hash.py) for instructions on how to do this.
 
 ## Rate Limiting
-
-I have not encountered any rate limits while using this API. The website itself makes requests to the API in an inefficient manner, therefore rate limiting is likely not a concern for developers here.
+If you're sending too many (or too many *failed*) login requests to the server, you're not unlikely to have you account be locked. This means that you will not be able to log in anymore until you requests a new password via e-mail.
+Other than that I have not encountered any traditional rate limits while using this API. The website itself makes requests to the API in an inefficient manner, therefore rate limiting is likely not a concern for developers here.
 
 ## Endpoints
 
